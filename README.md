@@ -2,7 +2,7 @@
 Barista game engine for Java, based off of javidx9's olcConsoleGameEngine/olcPixelGameEngine.
 
 ## Example video
-[Add video after uploading]
+https://www.youtube.com/watch?v=Z--j7RBTHDg
 
 ## Using the engine in Eclipse (tl;dr)
 1. Clone the repository.
