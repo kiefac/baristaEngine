@@ -8,12 +8,12 @@ https://www.youtube.com/watch?v=Z--j7RBTHDg
 1. Clone the repository.
 2. Put the contents of the eclipse folder in your workspace.
 3. Import Existing Project in Eclipse.
-4. Rename baristaExample, kiefac.barista, and BaristaExample.java.
+4. Rename baristaEngine, kiefac.barista, and BaristaExample.java.
 5. Replace code in your renamed BaristaExample.java under onUserCreate and onUserUpdate.
 
 ## Using the engine in Eclipse (for the absolute beginner)
 1. Download the .zip of the repository.
-2. Copy the contents of the "eclipse" folder into your Eclipse workspace folder (Windows default: "C:\Users\username\eclipse-workspace").
+2. Copy the contents of the "eclipse" folder into your Eclipse workspace folder (Windows default: `C:\Users\username\eclipse-workspace`).
 3. Open Eclipse.
 4. Go to File -> Import -> General -> Existing Projects into Workspace.
 5. Click Next. 
@@ -31,9 +31,9 @@ https://www.youtube.com/watch?v=Z--j7RBTHDg
 17. Type in your new package name and press Enter.
 18. Select the baristaEngine project and press F2.
 19. Type in your new project name and press Enter.
-20. Delete everything in onUserCreate except `return true;`.
-21. Delete everything in onUserUpdate except `return true;`.
-22. Go to main and setup the constructFrame with your screen width, screen height, pixel width, and pixel height.
+20. Delete everything in `onUserCreate` except `return true;`.
+21. Delete everything in `onUserUpdate` except `return true;`.
+22. Scroll down to `main` and setup the `constructFrame` with your viewport width, viewport height, pixel width, and pixel height.
 23. Start writing code!
 
 ## Missing functions?
