@@ -7,12 +7,17 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.Transparency;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
@@ -24,9 +29,10 @@ public abstract class Barista {
 	private JFrame gameFrame;
 	protected JPanel gameContent;
 	private Graphics2D screenGraphics;
-	private BufferedImage imageToPaint;
+	private VolatileImage imageToPaint;
 	private Graphics paintGraphics;
-	private int screenWidth, screenHeight;
+	protected int screenWidth;
+	protected int screenHeight;
 	private int pixelWidth, pixelHeight;
 	protected String gameName;
 	private boolean[] keyOldState = new boolean[KeyEvent.KEY_LAST];
@@ -89,7 +95,9 @@ public abstract class Barista {
 		monoFont = new Font(Font.MONOSPACED, Font.PLAIN, (int)(this.pixelHeight * 1.8));
 		gameFrame = new JFrame(gameName);
 		gameContent = new JPanel();
-		imageToPaint = new BufferedImage(screenWidth * pixelWidth, screenHeight * pixelHeight, BufferedImage.TYPE_INT_ARGB);
+		GraphicsEnvironment envir = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsConfiguration config = envir.getDefaultScreenDevice().getDefaultConfiguration();
+		imageToPaint = config.createCompatibleVolatileImage(screenWidth * pixelWidth, screenHeight * pixelHeight, Transparency.TRANSLUCENT);
 		screenGraphics = (Graphics2D) imageToPaint.getGraphics();
 		screenGraphics.setFont(monoFont);
 		for (int i = 0; i < keyboardState.length; i++) {
@@ -114,7 +122,9 @@ public abstract class Barista {
 		this.pixelHeight = pixelHeight;
 		monoFont = new Font(Font.MONOSPACED, Font.PLAIN, (int)(this.pixelHeight * 1.8));
 		gameContent.setPreferredSize(new Dimension(screenWidth * this.pixelWidth, screenHeight * this.pixelHeight));
-		imageToPaint = new BufferedImage(screenWidth * this.pixelWidth, screenHeight * this.pixelHeight, BufferedImage.TYPE_INT_ARGB);
+		GraphicsEnvironment envir = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsConfiguration config = envir.getDefaultScreenDevice().getDefaultConfiguration();
+		imageToPaint = config.createCompatibleVolatileImage(screenWidth * pixelWidth, screenHeight * pixelHeight, Transparency.TRANSLUCENT);
 		screenGraphics = (Graphics2D) imageToPaint.getGraphics();
 		screenGraphics.setFont(monoFont);
 
@@ -637,9 +647,10 @@ public abstract class Barista {
 		}
 	}
 	
-	public Color getColor(int x, int y) {
+	// commented out because VolatileImage does not support getRGB(); if you need this, send me a DM/Discord PM/GitHub issue
+	/*public Color getColor(int x, int y) {
 		return new Color(imageToPaint.getRGB(x * pixelWidth, y * pixelHeight));
-	}
+	}*/
 	
 	
 
@@ -728,9 +739,9 @@ public abstract class Barista {
 	}
 
 	protected class KeyState {
-		boolean pressed;
-		boolean held;
-		boolean released;
+		public boolean pressed;
+		public boolean held;
+		public boolean released;
 		public KeyState() {
 			pressed = false;
 			held = false;
